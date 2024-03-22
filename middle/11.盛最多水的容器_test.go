@@ -1,4 +1,4 @@
-package main
+package middle
 
 import (
 	"fmt"
@@ -7,8 +7,7 @@ import (
 
 func TestArea(t *testing.T) {
 	height := []int{1, 8, 6, 2, 5, 4, 8, 3, 7}
-	//fmt.Println(maxArea(height))
-
+	fmt.Println(maxArea(height))
 	fmt.Println(maxAreaByDoublePointer(height))
 }
 
