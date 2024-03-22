@@ -1,4 +1,4 @@
-package easy
+package linknode
 
 import (
 	"fmt"
