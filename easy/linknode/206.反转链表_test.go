@@ -22,5 +22,23 @@ func TestReverseList(t *testing.T) {
 		},
 	}
 	printNode(head)
+	newHead := reverseList(head)
+	printNode(newHead)
 
+}
+
+func reverseList(head *ListNode) *ListNode {
+	var newHead *ListNode
+	curr := head
+
+	for curr != nil {
+		next := curr.Next
+
+		curr.Next = newHead
+		newHead = curr
+
+		curr = next
+	}
+
+	return newHead
 }

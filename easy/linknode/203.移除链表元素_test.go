@@ -40,11 +40,9 @@ func TestRemoveElements(t *testing.T) {
 }
 
 func removeElements(head *ListNode, val int) *ListNode {
-	if head == nil {
-		return head
-	}
+	newHead := &ListNode{Next: head}
 
-	for temp := head; temp.Next != nil; {
+	for temp := newHead; temp.Next != nil; {
 		if temp.Next.Val == val {
 			temp.Next = temp.Next.Next
 		} else {
@@ -52,10 +50,7 @@ func removeElements(head *ListNode, val int) *ListNode {
 		}
 	}
 
-	if head.Val == val {
-		return head.Next
-	}
-	return head
+	return newHead.Next
 }
 
 func printNode(head *ListNode) {
