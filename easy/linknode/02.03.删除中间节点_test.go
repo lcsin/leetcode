@@ -18,18 +18,17 @@ func TestDeleteNode(t *testing.T) {
 	}
 	printNode(head)
 
-	DeleteNode(head)
+	deleteNode(head.Next)
 	printNode(head)
 }
 
-func DeleteNode(node *ListNode) {
-	if node == nil || node.Next == nil || node.Next.Next == nil {
-		return
-	}
-
-	for n := node; n != nil; n = n.Next {
-		if n.Val == node.Val {
-
+func deleteNode(node *ListNode) {
+	for node.Next != nil {
+		node.Val = node.Next.Val
+		if node.Next.Next == nil {
+			node.Next = nil
+			break
 		}
+		node = node.Next
 	}
 }
