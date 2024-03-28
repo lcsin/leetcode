@@ -5,23 +5,11 @@ import (
 )
 
 func TestDeleteDuplicates(t *testing.T) {
-	head := &ListNode{Val: 1, Next: &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val: 3,
-				Next: &ListNode{
-					Val:  3,
-					Next: nil,
-				},
-			},
-		},
-	}}
-	printNode(head)
+	head := GenListNode([]int{1, 2, 3, 3})
+	PrintNode(head)
 
 	newHead := deleteDuplicates(head)
-	printNode(newHead)
+	PrintNode(newHead)
 }
 
 func deleteDuplicates(head *ListNode) *ListNode {

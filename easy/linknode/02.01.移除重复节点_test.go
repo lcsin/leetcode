@@ -3,29 +3,11 @@ package linknode
 import "testing"
 
 func TestRemoveDuplicateNodes(t *testing.T) {
-	head := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val: 3,
-				Next: &ListNode{
-					Val: 3,
-					Next: &ListNode{
-						Val: 2,
-						Next: &ListNode{
-							Val:  1,
-							Next: nil,
-						},
-					},
-				},
-			},
-		},
-	}
-	printNode(head)
+	head := GenListNode([]int{1, 2, 3, 3, 2, 1})
+	PrintNode(head)
 
 	newHead := removeDuplicateNodes(head)
-	printNode(newHead)
+	PrintNode(newHead)
 }
 
 func removeDuplicateNodes(head *ListNode) *ListNode {

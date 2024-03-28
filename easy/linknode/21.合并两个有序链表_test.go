@@ -5,31 +5,13 @@ import (
 )
 
 func TestMergeTwoLists(t *testing.T) {
-	node1 := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val:  4,
-				Next: nil,
-			},
-		},
-	}
-	node2 := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 3,
-			Next: &ListNode{
-				Val:  4,
-				Next: nil,
-			},
-		},
-	}
-	printNode(node1)
-	printNode(node2)
+	node1 := GenListNode([]int{1, 2, 4})
+	node2 := GenListNode([]int{1, 3, 4})
+	PrintNode(node1)
+	PrintNode(node2)
 
 	newNode := mergeTwoLists(node1, node2)
-	printNode(newNode)
+	PrintNode(newNode)
 }
 
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {

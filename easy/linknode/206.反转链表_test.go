@@ -5,25 +5,10 @@ import (
 )
 
 func TestReverseList(t *testing.T) {
-	head := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val: 3,
-				Next: &ListNode{
-					Val: 4,
-					Next: &ListNode{
-						Val:  5,
-						Next: nil,
-					},
-				},
-			},
-		},
-	}
-	printNode(head)
+	head := GenListNode([]int{1, 2, 3, 4, 5})
+	PrintNode(head)
 	newHead := reverseList(head)
-	printNode(newHead)
+	PrintNode(newHead)
 
 }
 

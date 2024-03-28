@@ -3,23 +3,11 @@ package linknode
 import "testing"
 
 func TestDeleteNode(t *testing.T) {
-	head := &ListNode{
-		Val: 4,
-		Next: &ListNode{
-			Val: 5,
-			Next: &ListNode{
-				Val: 1,
-				Next: &ListNode{
-					Val:  9,
-					Next: nil,
-				},
-			},
-		},
-	}
-	printNode(head)
+	head := GenListNode([]int{4, 5, 1, 9})
+	PrintNode(head)
 
 	deleteNode(head.Next)
-	printNode(head)
+	PrintNode(head)
 }
 
 func deleteNode(node *ListNode) {
