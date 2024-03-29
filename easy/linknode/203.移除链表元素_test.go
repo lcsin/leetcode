@@ -4,11 +4,6 @@ import (
 	"testing"
 )
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func TestRemoveElements(t *testing.T) {
 	head := GenListNode([]int{1, 2, 6, 3, 4, 5, 6})
 	PrintNode(head)
