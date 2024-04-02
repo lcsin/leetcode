@@ -2,13 +2,20 @@ package main
 
 import "fmt"
 
-func main() {
-	num := 807
-	arr := make([]int, 0)
-	for num != 0 {
-		arr = append(arr, num%10)
-		num = num / 10
-	}
+var nums = []int{1, 2, 3, 4, 5, 6, 7}
 
-	fmt.Println(arr)
+func main() {
+	for _, v := range nums {
+		fmt.Println(v)
+		nums = append(nums, 1)
+	}
+	fmt.Println(nums)
+}
+
+func logicalPage(pageNo, pageSize int) []int {
+	if pageNo*pageSize > len(nums) {
+		return nums[(pageNo-1)*pageSize:]
+	} else {
+		return nums[(pageNo-1)*pageSize : pageNo*pageSize]
+	}
 }
