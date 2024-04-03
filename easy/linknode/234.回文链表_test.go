@@ -15,7 +15,8 @@ func TestIsPalindrome(t *testing.T) {
 
 func isPalindrome(head *ListNode) bool {
 	//return isPalindromeByArray(head)
-	return isPalindromeByReverse(head)
+	//return isPalindromeByReverse(head)
+	return isPalindromeByFastSlowPointer(head)
 }
 
 func isPalindromeByArray(head *ListNode) bool {
@@ -62,4 +63,40 @@ func isPalindromeByReverse(head *ListNode) bool {
 		return true
 	}
 	return false
+}
+
+func isPalindromeByFastSlowPointer(head *ListNode) bool {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+
+	reverseMidNode := reverse(slow)
+
+	curr := head
+	for i := reverseMidNode; i != nil; i = i.Next {
+		if curr.Val != i.Val {
+			return false
+		} else {
+			curr = curr.Next
+		}
+	}
+	return true
+}
+
+func reverse(head *ListNode) *ListNode {
+	var newHead *ListNode
+	curr := head
+
+	for curr != nil {
+		next := curr.Next
+
+		curr.Next = newHead
+		newHead = curr
+
+		curr = next
+	}
+
+	return newHead
 }
