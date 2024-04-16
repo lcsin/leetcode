@@ -11,6 +11,18 @@ func TestMinSubArrayLen(t *testing.T) {
 }
 
 func minSubArrayLen(target int, nums []int) int {
+	var ans, sum int
+	left, right := 0, 0
+	for left < len(nums) {
+		if sum < target && right < len(nums)-1 {
+			sum += nums[right]
+			right++
+		} else {
+			ans = right - left
+			sum -= nums[left]
+			left++
+		}
+	}
 
-	return 0
+	return ans
 }
