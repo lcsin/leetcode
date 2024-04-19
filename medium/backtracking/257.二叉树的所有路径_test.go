@@ -2,6 +2,7 @@ package backtracking
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -16,17 +17,29 @@ import (
 
 func TestBinaryTreePaths(t *testing.T) {
 	root := &TreeNode{
-		Val: 1,
+		Val: 37,
 		Left: &TreeNode{
-			Val:  2,
+			Val:  34,
 			Left: nil,
 			Right: &TreeNode{
-				Val:   5,
+				Val:   10,
 				Left:  nil,
 				Right: nil,
 			},
 		},
-		Right: &TreeNode{Val: 3},
+		Right: &TreeNode{
+			Val: 48,
+			Left: &TreeNode{
+				Val:   10,
+				Left:  nil,
+				Right: nil,
+			},
+			Right: &TreeNode{
+				Val:   48,
+				Left:  nil,
+				Right: nil,
+			},
+		},
 	}
 	fmt.Println(binaryTreePaths(root))
 }
@@ -38,20 +51,38 @@ type TreeNode struct {
 }
 
 var treepaths []string
-var treepath string
+var treenodes []string
 
 func binaryTreePaths(root *TreeNode) []string {
+	// 重置全局变量
+	defer func() {
+		treepaths = make([]string, 0)
+		treenodes = make([]string, 0)
+	}()
+
 	treepaths = make([]string, 0)
+	treenodes = make([]string, 0)
 	backtrackingBinaryTreePaths(root)
 	return treepaths
 }
 
 func backtrackingBinaryTreePaths(root *TreeNode) {
-	if root == nil {
-		treepaths = append(treepaths, treepath)
+	treenodes = append(treenodes, fmt.Sprintf("%v", root.Val))
+	// 遍历到子节点，添加结果
+	if root != nil && root.Left == nil && root.Right == nil {
+		treepaths = append(treepaths, strings.Join(treenodes, ""))
 		return
 	}
-	treepath += fmt.Sprintf("%v->", root.Val)
-	backtrackingBinaryTreePaths(root.Left)
-	backtrackingBinaryTreePaths(root.Right)
+	// 有左子树，递归遍历左子树
+	if root.Left != nil {
+		treenodes = append(treenodes, "->")
+		backtrackingBinaryTreePaths(root.Left)
+		treenodes = treenodes[:len(treenodes)-2]
+	}
+	// 有右子树，递归遍历右子树
+	if root.Right != nil {
+		treenodes = append(treenodes, "->")
+		backtrackingBinaryTreePaths(root.Right)
+		treenodes = treenodes[:len(treenodes)-2]
+	}
 }
