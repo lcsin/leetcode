@@ -29,17 +29,19 @@ import (
 解释：在移除非字母数字字符之后，s 是一个空字符串 "" 。由于空字符串正着反着读都一样，所以是回文串。
 */
 func TestIsPalindrome(t *testing.T) {
-	//fmt.Println(isPalindrome("A man, a plan, a canal: Panama"))
-	//fmt.Println(isPalindrome("race a car"))
-	//fmt.Println(isPalindrome(" "))
+	fmt.Println(isPalindrome("A man, a plan, a canal: Panama"))
+	fmt.Println(isPalindrome("race a car"))
+	fmt.Println(isPalindrome(" "))
 	fmt.Println(isPalindrome("A man, a plan, a canae: Panama"))
+	fmt.Println(isPalindrome("aa"))
 }
 
 /*
-ASCII码：
-0~9：48~57
-a~z：97~122
-A~Z：65~90
+算法实现：
+1. 定义两个指针p0、p1分别指向字符串的头部和尾部
+2. 当p0和p1指向的字符不为数字和字母时，分别移动p0和p1并跳过本次循环
+3. p0和p1指向的字符相等时，同时移动p0和p1，否则返回false
+4. 当遍历结束后，说明该字符串为回文串，返回true
 */
 func isPalindrome(s string) bool {
 	if strings.TrimSpace(s) == "" {
@@ -51,15 +53,15 @@ func isPalindrome(s string) bool {
 		p1 = len(s) - 1
 	)
 
-	for p0 != p1 {
+	for p0 < p1 {
 		s1 := string(s[p0])
 		s2 := string(s[p1])
 
-		if !checkASCII(p0) {
+		if !checkASCII(s[p0]) {
 			p0++
 			continue
 		}
-		if !checkASCII(p1) {
+		if !checkASCII(s[p1]) {
 			p1--
 			continue
 		}
@@ -75,7 +77,13 @@ func isPalindrome(s string) bool {
 	return true
 }
 
-func checkASCII(ascii int) bool {
+/*
+ASCII码：
+0~9：48~57
+a~z：97~122
+A~Z：65~90
+*/
+func checkASCII(ascii uint8) bool {
 	if (ascii >= 48 && ascii <= 57) || (ascii >= 97 && ascii <= 122) || (ascii >= 65 && ascii <= 90) {
 		return true
 	}

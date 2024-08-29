@@ -51,3 +51,66 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 	copy(nums1[m:], nums2)
 	sort.Ints(nums1)
 }
+
+func TestMergeByDoublePointer(t *testing.T) {
+	nums1 := []int{1, 2, 3, 4, 0, 0, 0}
+	nums2 := []int{2, 5, 6}
+	merge(nums1, 4, nums2, 3)
+	fmt.Println(nums1)
+
+	nums1 = []int{0}
+	nums2 = []int{1}
+	merge(nums1, 0, nums2, 1)
+	fmt.Println(nums1)
+
+	nums1 = []int{4, 0, 0, 0, 0, 0}
+	nums2 = []int{1, 2, 3, 5, 6}
+	merge(nums1, 1, nums2, 5)
+	fmt.Println(nums1)
+
+	nums1 = []int{2, 0}
+	nums2 = []int{1}
+	merge(nums1, 1, nums2, 1)
+	fmt.Println(nums1)
+}
+
+/*
+双指针遍历不同序列：
+1. p1,p2指针分别指向num1和nums2，再用一个新的数组nums3存放合并后的序列
+2. 每次比较p1和p2的值，把小的一方放到nums3里，并移动指针
+3. 当p1或p2有一方大于等于m或n时，循环终止，此时p1或p2有一方数组已经合并完
+4. 判断p1和p2的值是否小于m或n，如果成立，从p1或p2开始将剩余的元素合并到nums3即可
+*/
+func mergeByDoublePointer(nums1 []int, m int, nums2 []int, n int) {
+	if n == 0 {
+		return
+	}
+	if m == 0 {
+		copy(nums1, nums2)
+	}
+
+	var (
+		p1    = 0
+		p2    = 0
+		nums3 = make([]int, 0, m+n)
+	)
+
+	for p1 < m && p2 < n {
+		if nums1[p1] > nums2[p2] {
+			nums3 = append(nums3, nums2[p2])
+			p2++
+		} else {
+			nums3 = append(nums3, nums1[p1])
+			p1++
+		}
+	}
+
+	if p1 < m {
+		nums3 = append(nums3, nums1[p1:]...)
+	}
+	if p2 < n {
+		nums3 = append(nums3, nums2[p2:]...)
+	}
+
+	copy(nums1, nums3)
+}
