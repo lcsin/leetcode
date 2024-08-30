@@ -48,11 +48,11 @@ func TestName(t *testing.T) {
 }
 
 /*
-题目分析：
+思路：
 1. 已知number数组递增，且一定存在两个元素之和等于target
 2. 那么我们使用左右指针，从两边开始遍历求和就一定能找到答案
 
-算法实现：
+实现：
 1. p0指针从0开始，p1指针从len(numbers)-1开始，每次循环求两者之和sum
 2. 如果sum等于target，找到答案，返回p0+1和p1+1
 3. 如果sum小于target，说明sum偏小，p0指针往右移动
