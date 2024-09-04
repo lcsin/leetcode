@@ -32,19 +32,19 @@ import (
 func TestName(t *testing.T) {
 	numbers := []int{1, 2, 3, 4, 5, 6}
 	target := 9
-	fmt.Println(twoSum(numbers, target))
+	fmt.Println(twoSumII(numbers, target))
 
 	numbers = []int{2, 7, 11, 15}
 	target = 9
-	fmt.Println(twoSum(numbers, target))
+	fmt.Println(twoSumII(numbers, target))
 
 	numbers = []int{2, 3, 4}
 	target = 6
-	fmt.Println(twoSum(numbers, target))
+	fmt.Println(twoSumII(numbers, target))
 
 	numbers = []int{-1, 0}
 	target = -1
-	fmt.Println(twoSum(numbers, target))
+	fmt.Println(twoSumII(numbers, target))
 }
 
 /*
@@ -58,7 +58,7 @@ func TestName(t *testing.T) {
 3. 如果sum小于target，说明sum偏小，p0指针往右移动
 4. 如果sum大于target，说明sum偏大，p1指针往左移动
 */
-func twoSum(numbers []int, target int) []int {
+func twoSumII(numbers []int, target int) []int {
 	var (
 		p0  = 0
 		p1  = len(numbers) - 1

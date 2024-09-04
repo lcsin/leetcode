@@ -20,28 +20,31 @@ import (
 解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1 。
 */
 func TestStrStr(t *testing.T) {
-	//fmt.Println(strStr("sadbutsad", "sad"))
-	//fmt.Println(strStr("leetcode", "leeto"))
-	fmt.Println(strStr("mississippi", "issip"))
+	fmt.Println(strStr("sadbutsad", "sad"))     // 0
+	fmt.Println(strStr("leetcode", "leeto"))    // -1
+	fmt.Println(strStr("mississippi", "issip")) // 4
 }
 
+/*
+思路：
+1. 遍历haystack数组，当存在haystack[i]==needle[0]时，判断haystack[i:i+len(needle)]==needle
+2. 如果成立直接返回i，如果不成立则继续遍历，直到遍历结束，返回-1
+
+注意：haystack[i:i+len(needle)]有可能越界
+*/
 func strStr(haystack string, needle string) int {
-	var (
-		p0 = 0
-		p1 = 0
-	)
-
+	var p0 int
 	for p0 < len(haystack) {
-		if haystack[p0] == needle[p1] {
-			p1++
-		} else {
-			p1 = 0
+		if haystack[p0] == needle[0] {
+			length := p0 + len(needle)
+			if length > len(haystack) {
+				return -1
+			}
+			if haystack[p0:length] == needle {
+				return p0
+			}
 		}
-
 		p0++
-		if p1 == len(needle) {
-			return p0 - len(needle)
-		}
 	}
 
 	return -1
