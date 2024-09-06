@@ -59,9 +59,5 @@ func isSubsequence(s string, t string) bool {
 		p1++
 	}
 
-	if p0 < len(s) {
-		return false
-	}
-
-	return true
+	return p0 >= len(s)
 }

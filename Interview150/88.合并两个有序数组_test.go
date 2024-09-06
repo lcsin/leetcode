@@ -55,22 +55,22 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 func TestMergeByDoublePointer(t *testing.T) {
 	nums1 := []int{1, 2, 3, 4, 0, 0, 0}
 	nums2 := []int{2, 5, 6}
-	merge(nums1, 4, nums2, 3)
+	mergeByDoublePointer(nums1, 4, nums2, 3)
 	fmt.Println(nums1)
 
 	nums1 = []int{0}
 	nums2 = []int{1}
-	merge(nums1, 0, nums2, 1)
+	mergeByDoublePointer(nums1, 0, nums2, 1)
 	fmt.Println(nums1)
 
 	nums1 = []int{4, 0, 0, 0, 0, 0}
 	nums2 = []int{1, 2, 3, 5, 6}
-	merge(nums1, 1, nums2, 5)
+	mergeByDoublePointer(nums1, 1, nums2, 5)
 	fmt.Println(nums1)
 
 	nums1 = []int{2, 0}
 	nums2 = []int{1}
-	merge(nums1, 1, nums2, 1)
+	mergeByDoublePointer(nums1, 1, nums2, 1)
 	fmt.Println(nums1)
 }
 
