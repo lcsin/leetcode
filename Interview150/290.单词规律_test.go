@@ -26,6 +26,7 @@ func TestWordPattern(t *testing.T) {
 	fmt.Println(wordPattern("abba", "dog cat cat dog"))  // true
 	fmt.Println(wordPattern("abba", "doc cat cat fish")) // false
 	fmt.Println(wordPattern("aaaa", "dog cat cat dog"))  // false
+	fmt.Println(wordPattern("aabb", "dog dog dog dog"))  // false
 }
 
 func wordPattern(pattern string, s string) bool {
@@ -40,7 +41,7 @@ func wordPattern(pattern string, s string) bool {
 	for p1 < len(s) {
 		if string(s[p1]) == " " || p1 == len(s)-1 {
 			if p1 == len(s)-1 {
-				str = s[space:len(s)]
+				str = s[space:]
 			} else {
 				str = s[space:p1]
 			}
