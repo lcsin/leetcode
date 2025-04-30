@@ -2,6 +2,7 @@ package double_pointer
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -30,36 +31,27 @@ func TestWordPattern(t *testing.T) {
 }
 
 func wordPattern(pattern string, s string) bool {
-	dict := make(map[uint8]string, 0)
+	strs := strings.Split(s, " ")
+	if len(pattern) != len(strs) {
+		return false
+	}
 
-	var (
-		p0    int
-		p1    int
-		space int
-		str   string
-	)
-	for p1 < len(s) {
-		if string(s[p1]) == " " || p1 == len(s)-1 {
-			if p1 == len(s)-1 {
-				str = s[space:]
-			} else {
-				str = s[space:p1]
+	dict1 := make(map[string]string)
+	dict2 := make(map[string]string)
+
+	for i, str := range strs {
+		key := string(pattern[i])
+		_, ok1 := dict1[key]
+		_, ok2 := dict2[str]
+
+		if !ok1 && !ok2 {
+			dict1[key] = str
+			dict2[str] = key
+		} else {
+			if dict1[key] != str || dict2[str] != key {
+				return false
 			}
-
-			v, ok := dict[pattern[p0]]
-			if !ok {
-				dict[pattern[p0]] = str
-			} else {
-				if str != v {
-					return false
-				}
-			}
-
-			space = p1 + 1
-			p0++
 		}
-
-		p1++
 	}
 
 	return true
