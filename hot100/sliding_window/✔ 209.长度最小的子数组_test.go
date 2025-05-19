@@ -1,4 +1,4 @@
-package hot100
+package sliding_window
 
 import "testing"
 
@@ -37,39 +37,29 @@ func TestMinSubArrayLen(t *testing.T) {
 }
 
 /*
-滑动窗口：
-1. 使用同向双向指针，从左到右遍历，当sum<target时，移动right指针
-2. 当sum >= target时，停止right指针，移动left指针，缩小范围
-3. 直到right等于nums长度，且sum<target时，停止遍历
+滑动窗口：在窗口内保持sum>=target的同时，缩小范围，得到最小值
+1. 初始状态下，left、right指针都从0开始向右移动
+2. left指向满足条件的子数组的左端点，主要用于缩小窗口范围；right指向满足条件的子数组的右端点，主要用于扩大窗口范围
+3. 当sum-nums[left]>=target时，尝试移动left指针，缩小窗口范围，直到sum小于target，那么表示找到了最小值，进行更新
+4. 直到nums数组枚举结束，返回答案
 */
 func minSubArrayLen(target int, nums []int) int {
-	var (
-		res, left, right int
-		sum              = nums[left]
-	)
-
-	for {
-		if sum >= target {
-			x := right - left + 1
-			if res == 0 {
-				res = x
-			} else {
-				res = min(res, x)
-			}
-
+	n := len(nums)
+	ans, sum, left := n+1, 0, 0
+	// 右指针指向数组右断点，扩大窗口范围
+	for right, x := range nums {
+		sum += x
+		// 满足和大于等于target时，移动left指针，尝试缩小窗口范围
+		for sum-nums[left] >= target {
 			sum -= nums[left]
 			left++
-		} else {
-			right++
-			if right < len(nums) {
-				sum += nums[right]
-			}
 		}
-
-		if sum < target && right == len(nums) {
-			break
+		if sum >= target {
+			ans = min(ans, right-left+1)
 		}
 	}
-
-	return res
+	if ans <= n {
+		return ans
+	}
+	return 0
 }

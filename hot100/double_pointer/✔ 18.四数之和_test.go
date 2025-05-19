@@ -1,4 +1,4 @@
-package hot100
+package double_pointer
 
 import (
 	"sort"

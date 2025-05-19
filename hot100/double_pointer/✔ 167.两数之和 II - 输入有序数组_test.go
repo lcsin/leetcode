@@ -1,4 +1,4 @@
-package hot100
+package double_pointer
 
 import "testing"
 
@@ -43,7 +43,7 @@ func TestTwoSum2(t *testing.T) {
 
 /*
 解题思路：
-1. 数组是有序递增的，使用双向指针计算两边的两数之和sum
+1. 数组是有序递增的，使用相向双指针计算两边的两数之和sum
 2. 如果sum大于target，说明需要移动右指针
 3. 如果sum小于target，说明需要移动左指针
 4. 直到sum等于target，说明找到了两数之和等于target的元素

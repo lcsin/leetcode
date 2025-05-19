@@ -1,4 +1,4 @@
-package hot100
+package double_pointer
 
 import (
 	"sort"
@@ -51,7 +51,7 @@ func TestCountPairs(t *testing.T) {
 
 /*
 1. 先对nums从小到大进行排序，这样可以利用数组的有序性，
-2. 对nums进行枚举，使用双指针从两边开始遍历，
+2. 对nums进行枚举，使用相向双指针从两边开始遍历，
 3. 如果nums[left]+nums[right]<target，说明right到left的元素都符合条件，可以直接开始下一次枚举
 4. 否则移动right指针，继续判断nums[left]+nums[right]<target，直到left>=right开始下一次枚举
 */

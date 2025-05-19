@@ -1,4 +1,4 @@
-package hot100
+package double_pointer
 
 import (
 	"math"
@@ -38,7 +38,7 @@ func TestThreeSumClosest(t *testing.T) {
 
 /*
 1. 先对数组nums从小到大排序，将三数之和转变为两数之和
-2. 转变的方式是，从nums数组第一位开始枚举，然后使用双向双指针遍历最接近target的和
+2. 转变的方式是，从nums数组第一位开始枚举，然后使用相向双指针遍历最接近target的和
 3. 计算和的结果与target的差值，遍历比较差值最小的三数，并更新值
 */
 func threeSumClosest(nums []int, target int) int {

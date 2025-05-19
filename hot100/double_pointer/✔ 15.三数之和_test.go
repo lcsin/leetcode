@@ -1,4 +1,4 @@
-package hot100
+package double_pointer
 
 import (
 	"sort"
@@ -46,7 +46,7 @@ func TestThreeSum(t *testing.T) {
 解题思路：
 1. 先将数组排序
 2. 然后将三数之和转变为两数之和，转变的思路是循环枚举第一个数
-3. 最后使用双相双指针遍历所有可能的答案
+3. 最后使用相向双指针遍历所有可能的答案
 4. 题目要求答案中不可以包含重复的三元组，所以还要考虑去重的情况（可以考虑用map去重）
 */
 func threeSum(nums []int) [][]int {
