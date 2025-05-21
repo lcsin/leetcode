@@ -30,14 +30,40 @@ import (
 s 由英文字母、数字、符号和空格组成
 */
 func TestLengthOfLongestSubstring(t *testing.T) {
-	t.Log(lengthOfLongestSubstring2("abcabcbb")) // 3
-	t.Log(lengthOfLongestSubstring2("bbbbb"))    // 1
-	t.Log(lengthOfLongestSubstring2("pwwkew"))   // 3
-	t.Log(lengthOfLongestSubstring2("asjrgapa")) // 6
-	t.Log(lengthOfLongestSubstring2("dvdf"))     // 3
+	t.Log(lengthOfLongestSubstring("abcabcbb")) // 3
+	t.Log(lengthOfLongestSubstring("bbbbb"))    // 1
+	t.Log(lengthOfLongestSubstring("pwwkew"))   // 3
+	t.Log(lengthOfLongestSubstring("asjrgapa")) // 6
+	t.Log(lengthOfLongestSubstring("dvdf"))     // 3
 }
 
+/*
+1. 因为s由英文字母、数字、符号和空格组成，所以可以借助数组来协助判断子串中是否存在重复的字符
+2. 每次移动窗口的右端点时，即对数组中该字符的次数+1
+3. 当数组中某个字符出现的次数大于1时，说明此时子串中存在重复字符，此时需要缩小窗口，移动左端点，移动之前需要对左端点字母出现的次数-1
+4. 每次移动右端点，更新结果的最大值
+*/
 func lengthOfLongestSubstring(s string) int {
+	var (
+		ans, left int
+		cnt       = [128]int{}
+	)
+
+	for right, c := range s {
+		cnt[c]++
+		// 说明存在重复字符
+		for cnt[c] > 1 {
+			cnt[s[left]]-- // 移除窗口左端点字母
+			left++         // 缩小窗口
+		}
+		ans = max(ans, right-left+1) // 更新窗口长度最大值
+	}
+
+	return ans
+}
+
+// 不借助数组来构造窗口的方法，通过左右指针的移动来构造窗口
+func lengthOfLongestSubstring2(s string) int {
 	var (
 		ans, left int
 		str       string
@@ -57,23 +83,4 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	return max(ans, len(str))
-}
-
-func lengthOfLongestSubstring2(s string) int {
-	var (
-		ans, left int
-		cnt       = [128]int{}
-	)
-
-	for right, c := range s {
-		cnt[c]++
-		// 说明存在重复字符
-		for cnt[c] > 1 {
-			cnt[s[left]]-- // 移除窗口左端点字母
-			left++         // 缩小窗口
-		}
-		ans = max(ans, right-left+1) // 更新窗口长度最大值
-	}
-
-	return ans
 }
