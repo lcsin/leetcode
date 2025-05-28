@@ -1,4 +1,4 @@
-package binary_search
+package hot100
 
 import (
 	"sort"
@@ -69,11 +69,6 @@ func binarySearch(nums []int, target int) int {
 		} else {
 			right = mid - 1
 		}
-	}
-
-	// target不在数组中，且大于数组中元素的最大值，需要在数组尾部插入
-	if left == len(nums)-1 && target > nums[left] {
-		return left + 1
 	}
 
 	// left就是当前数组中target的第一个目标
